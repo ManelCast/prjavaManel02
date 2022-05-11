@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Pokemons</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <div class="pokemonCard"></div>
+    
+</body>
+<script>
+    const pokemonCard = document.querySelector(".pokemonCard")
+    const contenedorPokemons = document.querySelector(".contenedorPokemons")
+    const url="https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
+    
+    let pokemons = []
+
+    fetch(url, {
+        origin: "*",
+        methods: ["GET","POST"],
+        allowedHeaders: ["Content-Type"],
+        headers: {
+            "Content-Type": "aplication/json",
+        },
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data){
+        pokemons=data
+    })
+
+    function cardPokemon(pokemon){
+        const card = document.createElement("div")
+        card.innerHTML=`
+        Nombre: ${pokemon.name}
+        `
+        return card
+    }
+    function renderPokemons(){
+        pokemons.forEach(pokemon)
+    }
+
+    function callback(func,numero){
+        return func(numero)
+    }
+    callback(function(numero){
+        console.log(numero)
+    },1)
+</script>
+</html>
